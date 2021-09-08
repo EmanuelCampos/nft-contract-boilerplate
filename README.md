@@ -15,9 +15,9 @@ The first things you need to do are cloning this repository and installing its
 dependencies:
 
 ```sh
-git clone https://github.com/nomiclabs/hardhat-hackathon-boilerplate.git
-cd hardhat-hackathon-boilerplate
-npm install
+git clone https://github.com/EmanuelCampos/nft-contract-boilerplate
+cd nft-contract-boilerplate
+yarn install
 ```
 
 Once installed, let's run Hardhat's testing network:
