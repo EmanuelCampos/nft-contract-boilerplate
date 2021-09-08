@@ -19,36 +19,19 @@ async function main() {
 
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
-  const Token = await ethers.getContractFactory("Token");
+  const Token = await ethers.getContractFactory("GameItem");
   const token = await Token.deploy();
   await token.deployed();
 
-  console.log("Token address:", token.address);
+  const Token2 = await ethers.getContractFactory("GameItems");
+  const token2 = await Token.deploy();
+  await token2.deployed();
 
-  // We also save the contract's artifacts and address in the frontend directory
-  saveFrontendFiles(token);
+  console.log("ERC721:", token.address);
+  console.log("ERC1155:", token2.address);
+
 }
 
-function saveFrontendFiles(token) {
-  const fs = require("fs");
-  const contractsDir = __dirname + "/../frontend/src/contracts";
-
-  if (!fs.existsSync(contractsDir)) {
-    fs.mkdirSync(contractsDir);
-  }
-
-  fs.writeFileSync(
-    contractsDir + "/contract-address.json",
-    JSON.stringify({ Token: token.address }, undefined, 2)
-  );
-
-  const TokenArtifact = artifacts.readArtifactSync("Token");
-
-  fs.writeFileSync(
-    contractsDir + "/Token.json",
-    JSON.stringify(TokenArtifact, null, 2)
-  );
-}
 
 main()
   .then(() => process.exit(0))

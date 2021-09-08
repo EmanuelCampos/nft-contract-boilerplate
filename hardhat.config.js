@@ -1,10 +1,19 @@
 require("@nomiclabs/hardhat-waffle");
+const fs = require("fs")
 
-// The next line is part of the sample project, you don't need it in your
-// project. It imports a Hardhat task definition, that can be used for
-// testing the frontend.
-require("./tasks/faucet");
+const privateKey = fs.readFileSync(".secret").toString()
+const projectId =
+
 
 module.exports = {
-  solidity: "0.7.3"
+  networks: {
+    hardhat: {
+      chainId: 1337
+    },
+    rinkeby: {
+      url: `https://rinkeby.infura.io/v3/${projectId}`,
+      accounts: [privateKey]
+    },
+  },
+  solidity: "0.8.4",
 };
